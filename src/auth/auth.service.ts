@@ -25,10 +25,12 @@ export class AuthService {
     const result = salt + '.' + hash.toString('hex');
 
     const encryptUserObj = { ...createUserDto, pw: result };
-
-    const user = await this.userService.create(encryptUserObj);
-
-    return user;
+    try {
+      const user = await this.userService.create(encryptUserObj);
+      return user;
+    } catch (err) {
+      throw new BadRequestException('server Err');
+    }
   }
 
   async signin(createUserDto: CreateUserDto) {

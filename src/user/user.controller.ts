@@ -19,19 +19,16 @@ export class UserController {
     private authService: AuthService,
   ) {}
 
-  @Post()
+  @Post('/signup')
   async create(@Body() createUserDto: CreateUserDto) {
-    console.log(
-      'controller param createUserDto',
-      createUserDto,
-      this.authService,
-    );
     const user = await this.authService.signup(createUserDto);
     return user;
   }
 
   @Post('/signin')
   async signin(@Body() createUserDto: CreateUserDto) {
+    console.log('오나요 여기? inin');
+
     const user = await this.authService.signin(createUserDto);
     return user;
   }

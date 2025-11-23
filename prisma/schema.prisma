@@ -22,4 +22,17 @@ model User {
   imgUrl     String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  checkItems CheckItem[]
+}
+
+model CheckItem {
+  id Int @id @default(autoincrement())
+  title String
+  imgUrl     String?
+  period String
+  target_period String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId  Int
+  user    User      @relation(fields: [userId], references: [id])
 }

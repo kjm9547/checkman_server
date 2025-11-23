@@ -13,7 +13,7 @@ export class UserService {
         pw: createUserDto.pw,
         nickName: createUserDto.nickName,
         imgUrl: createUserDto.imgUrl || '',
-        type: createUserDto.type,
+        type: createUserDto.type || 'checkman',
       },
     });
   }
