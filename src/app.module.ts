@@ -7,6 +7,7 @@ import { ImgUploadController } from './img-upload/img-upload.controller';
 import { ImgUploadService } from './img-upload/img-upload.service';
 import { ConfigModule } from '@nestjs/config';
 import { CheckitemModule } from './checkitem/checkitem.module';
+import { JwtStrategy } from './jwt.strategy/jwt.strategy';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { CheckitemModule } from './checkitem/checkitem.module';
     CheckitemModule,
   ],
   controllers: [AppController, ImgUploadController],
-  providers: [AppService, ImgUploadService],
+  providers: [AppService, ImgUploadService, JwtStrategy],
 })
 export class AppModule {}
