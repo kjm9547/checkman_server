@@ -11,4 +11,10 @@ export class CreateCheckitemDto {
   @IsString()
   @IsOptional()
   imgUrl: string;
+
+  @IsString()
+  start: string;
+
+  @IsString()
+  end: string;
 }

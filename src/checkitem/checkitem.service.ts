@@ -6,21 +6,23 @@ import { PrismaService } from 'src/prisma.service';
 @Injectable()
 export class CheckitemService {
   constructor(private prisma: PrismaService) {}
-  create(createCheckitemDto: CreateCheckitemDto) {
-    console.log('userId는 토큰 발행전 임시로 1번 고정으로 생성됩니다.');
+  create(createCheckitemDto: CreateCheckitemDto, userId: number) {
+    console.log('userId는 토큰 발행전 임시로 번 고정으로 생성됩니다.', userId);
     return this.prisma.checkItem.create({
       data: {
         period: createCheckitemDto.period,
         target_period: createCheckitemDto.target_period,
         title: createCheckitemDto.title,
         imgUrl: createCheckitemDto.imgUrl,
-        userId: 1,
+        userId: userId,
+        start: createCheckitemDto.start,
+        end: createCheckitemDto.end,
       },
     });
   }
 
-  findAll(id: number) {
-    return this.prisma.checkItem.findMany({ where: { id } });
+  findAll(userId: number) {
+    return this.prisma.checkItem.findMany({ where: { userId } });
   }
 
   findOne(id: number) {

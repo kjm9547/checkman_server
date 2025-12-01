@@ -6,23 +6,29 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { CheckitemService } from './checkitem.service';
 import { CreateCheckitemDto } from './dto/create-checkitem.dto';
 import { UpdateCheckitemDto } from './dto/update-checkitem.dto';
-
+import { AuthGuard } from '@nestjs/passport';
 @Controller('checkitem')
 export class CheckitemController {
   constructor(private readonly checkitemService: CheckitemService) {}
-
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() createCheckitemDto: CreateCheckitemDto) {
-    return this.checkitemService.create(createCheckitemDto);
+  create(@Req() req, @Body() createCheckitemDto: CreateCheckitemDto) {
+    const userId = req.user.userId;
+    console.log('CheckitemController - create - userId:', userId);
+    return this.checkitemService.create(createCheckitemDto, userId);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
-  findAll() {
-    return this.checkitemService.findAll(1);
+  findAll(@Req() req) {
+    const userId = req.user.userId;
+    return this.checkitemService.findAll(userId);
   }
 
   @Get(':id')

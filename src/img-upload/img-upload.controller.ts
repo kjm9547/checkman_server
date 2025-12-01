@@ -10,9 +10,7 @@ import { ApiBody, ApiConsumes, ApiOperation } from '@nestjs/swagger';
 
 @Controller('upload')
 export class ImgUploadController {
-  constructor(private readonly uploadService: ImgUploadService) {
-    console.log(process.env);
-  }
+  constructor(private readonly uploadService: ImgUploadService) {}
 
   @Post('image')
   @UseInterceptors(FileInterceptor('file'))

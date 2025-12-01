@@ -28,6 +28,8 @@ model User {
 
 model CheckItem {
   id Int @id @default(autoincrement())
+  start String
+  end String
   title String
   imgUrl     String?
   period String
